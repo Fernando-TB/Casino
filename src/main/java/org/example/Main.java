@@ -44,7 +44,6 @@ public class Main {
      */
     public static int leerOpcion(Scanner in) {
         int opcion = in.nextInt();
-        System.out.println("sisi");
         return opcion;
     }
     /**
@@ -52,7 +51,15 @@ public class Main {
      * @param opcion opción elegida por el usuario.
      * @param in Scanner para entrada por consola.
      */
-    public static void ejecutarOpcion(int opcion, Scanner in) {}
+    public static void ejecutarOpcion(int opcion, Scanner in) {
+        if (opcion == 1){
+            System.out.println("Ejecutando...");
+            iniciarRonda();
+        } else if (opcion == 2) {
+            System.exit(0);
+        }
+
+    }
     /**
      * Inicia una ronda de la ruleta: leer apuesta, girar, evaluar y mostrar resultado.
      * @param in Scanner para entrada por consola.
@@ -72,7 +79,10 @@ public class Main {
      * @return número de la ruleta.
      */
     public static int girarRuleta() {
-        return 0;
+        Random ruleta = new Random();
+        int numeroRuleta = ruleta.nextInt(37);
+
+        return numeroRuleta;
     }
     /**
      * Evalúa si la apuesta realizada por el jugador fue acertada.
