@@ -24,6 +24,7 @@ public class Main {
         mostrarMenu();
         Scanner scanner = new Scanner(System.in);
         leerOpcion(scanner);
+
     }
     /**
      * Muestra en consola las opciones disponibles del menú.
