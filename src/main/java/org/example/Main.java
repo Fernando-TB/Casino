@@ -79,9 +79,7 @@ public class Main {
      * @return número de la ruleta.
      */
     public static int girarRuleta() {
-        Random ruleta = new Random();
-        int numeroRuleta = ruleta.nextInt(37);
-
+        int numeroRuleta = rng.nextInt(37);
         return numeroRuleta;
     }
     /**
