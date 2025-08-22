@@ -31,7 +31,7 @@ public class Main {
      */
 
     public static void mostrarMenu() {
-        System.out.println("1.Par");
+        System.out.println("1.Iniciar ronda");
         System.out.println("2.Impar");
         System.out.println("3.Rojo");
         System.out.println("4.Negro");
