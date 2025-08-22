@@ -29,6 +29,7 @@ public class Main {
     /**
      * Muestra en consola las opciones disponibles del menú.
      */
+
     public static void mostrarMenu() {
         System.out.println("1.Par");
         System.out.println("2.Impar");
