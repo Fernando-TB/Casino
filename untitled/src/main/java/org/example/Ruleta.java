@@ -1,4 +1,5 @@
 package org.example;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -87,6 +88,15 @@ public class Ruleta {
      * @return true si acertó, false si perdió.
      */
     public static boolean evaluarResultado(int numero, char tipo) {
+        if (tipo == 'R') {
+            for (int num : numerosRojos) {
+                if (num == numero) {
+                    boolean acierto = True;
+                    return acierto;
+                }
+
+            }
+        }
         return false;
     }
     /**
