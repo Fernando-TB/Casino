@@ -57,13 +57,21 @@ public class Ruleta {
         } else if (opcion == 2) {
             System.exit(0);
         }
-
     }
     /**
      * Inicia una ronda de la ruleta: leer apuesta, girar, evaluar y mostrar resultado.
      * @param in Scanner para entrada por consola.
      */
-    public static void iniciarRonda(Scanner in) {}
+    public static void iniciarRonda(Scanner in) {
+        System.out.println("Indique el tipo de apuesta (R/N/P/I): ");
+        char tipo = leerTipoApuesta(in);
+        System.out.println("Indique el monto: ");
+        int monto = in.nextInt();
+        int numero = girarRuleta();
+        boolean acierto = evaluarResultado(numero, tipo);
+        registrarResultado(numero, tipo, acierto);
+        mostrarResultado(numero,tipo,monto,acierto);
+    }
     /**
      * Permite al usuario seleccionar el tipo de apuesta (R/N/P/I).
      * @param in Scanner para entrada por consola.
@@ -89,12 +97,23 @@ public class Ruleta {
      */
     public static boolean evaluarResultado(int numero, char tipo) {
         if (tipo == 'R') {
-            for (int num : numerosRojos) {
-                if (num == numero) {
-                    boolean acierto = True;
-                    return acierto;
-                }
+            boolean acierto = esRojo(numero);
+            return acierto;
 
+        }else if (tipo == 'N'){
+            boolean acierto = esRojo(numero);
+            return acierto;
+        }else if (tipo == 'P'){
+            if (numero % 2 == 0){
+                return true;
+            }else {
+                return false;
+            }
+        }else if (tipo == 'I'){
+            if (numero %2 ==1){
+                return true;
+            }else  {
+                return false;
             }
         }
         return false;
@@ -105,6 +124,11 @@ public class Ruleta {
      * @return true si es rojo, false en caso contrario.
      */
     public static boolean esRojo(int n) {
+        for (int numero : numerosRojos){
+            if (numero == n){
+                return true;
+            }
+        }
         return false;
     }
     /**
@@ -113,7 +137,12 @@ public class Ruleta {
      * @param apuesta monto apostado.
      * @param acierto si el jugador acertó o no.
      */
-    public static void registrarResultado(int numero, int apuesta, boolean acierto) {}
+    public static void registrarResultado(int numero, int apuesta, boolean acierto) {
+        historialNumeros[historialSize] = numero;
+        historialApuestas[historialSize] = apuesta;
+        historialAciertos[historialSize] = acierto;
+        historialSize += 1;
+    }
     /**
      * Muestra en consola el resultado de la ronda.
      * @param numero número obtenido en la ruleta.
@@ -122,7 +151,18 @@ public class Ruleta {
      * @param acierto si el jugador ganó o perdió.
      */
     public static void mostrarResultado(int numero, char tipo, int monto, boolean
-            acierto) {}
+            acierto) {
+        System.out.println("Este giro cayo en:");
+        System.out.println(numero);
+        System.out.println("La apuesta fue:");
+        System.out.println(tipo);
+        System.out.println("El monto apostado fue:");
+        System.out.println(monto);
+        System.out.println("La apuesta fue:");
+        System.out.println(acierto);
+
+
+    }
     /**
      * Muestra estadísticas generales de todas las rondas jugadas.
      */
