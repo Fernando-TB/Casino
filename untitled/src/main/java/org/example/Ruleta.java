@@ -22,11 +22,12 @@ public class Ruleta {
      * Controla el flujo principal del programa mostrando un menú en consola.
      */
     public static void menu() {
-        mostrarMenu();
-        Scanner scanner = new Scanner(System.in);
-        int opcion = leerOpcion(scanner);
-        ejecutarOpcion(opcion,scanner);
-
+        while (true) {
+            mostrarMenu();
+            Scanner scanner = new Scanner(System.in);
+            int opcion = leerOpcion(scanner);
+            ejecutarOpcion(opcion, scanner);
+        }
     }
     /**
      * Muestra en consola las opciones disponibles del menú.
@@ -34,7 +35,8 @@ public class Ruleta {
 
     public static void mostrarMenu() {
         System.out.println("1.Iniciar ronda");
-        System.out.println("2.Salir");
+        System.out.println("2.Mostrar estadisticas");
+        System.out.println("3.Salir");
     }
     /**
      * Lee la opción elegida por el usuario desde teclado.
@@ -55,6 +57,8 @@ public class Ruleta {
             System.out.println("Ejecutando...");
             iniciarRonda(in);
         } else if (opcion == 2) {
+            mostrarEstadisticas();
+        } else if (opcion == 3) {
             System.exit(0);
         }
     }
@@ -69,7 +73,7 @@ public class Ruleta {
         int monto = in.nextInt();
         int numero = girarRuleta();
         boolean acierto = evaluarResultado(numero, tipo);
-        registrarResultado(numero, tipo, acierto);
+        registrarResultado(numero,monto, acierto);
         mostrarResultado(numero,tipo,monto,acierto);
     }
     /**
@@ -160,11 +164,32 @@ public class Ruleta {
         System.out.println(monto);
         System.out.println("La apuesta fue:");
         System.out.println(acierto);
-
-
     }
     /**
      * Muestra estadísticas generales de todas las rondas jugadas.
      */
-    public static void mostrarEstadisticas() {}
+    public static void mostrarEstadisticas() {
+        int montoTotal = 0;
+        int totalAciertos = 0;
+        int ganancia = 0;
+        float porcentaje;
+
+        for (int i = 0; i < historialSize; i++){
+            montoTotal += historialApuestas[i];
+            if (historialAciertos[i]){
+                totalAciertos++;
+                ganancia += historialApuestas[i];
+            }else {
+                ganancia -= historialApuestas[i];
+            }
+        }
+
+        porcentaje = ((float) totalAciertos /historialSize)*100;
+
+        System.out.println("Se han jugado "+ historialSize + "rondas.");
+        System.out.println("Se ha apostado un total de " + montoTotal +"$");
+        System.out.println("Se ha acertado la apuesta un total de " + totalAciertos + " veces.");
+        System.out.println("Tiene un porcentaje de acierto del " + porcentaje + "%");
+        System.out.println("En total su ganancia/perdida fue de: " + ganancia + "$");
+    }
 }
